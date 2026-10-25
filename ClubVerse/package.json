@@ -1,0 +1,16 @@
+{
+  "name": "club-management-system",
+  "version": "1.0.0",
+  "description": "Club Management System using Node.js, Express, MongoDB and sessions",
+  "main": "app.js",
+  "scripts": { "start": "node app.js", "dev": "nodemon app.js" },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^5.1.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "mongoose": "^8.9.5"
+  },
+  "devDependencies": { "nodemon": "^3.1.9" }
+}

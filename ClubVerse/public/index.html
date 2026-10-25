@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ระบบจัดการชมรม</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <header class="topbar"><button id="backButton" class="back-button" aria-label="ย้อนกลับ"
+            title="ย้อนกลับ">←</button><button id="menuToggle" class="hamburger" aria-label="เปิดเมนู">☰</button><a
+            href="#home" class="brand">🎓 ClubVerse</a>
+        <div id="accountArea"><button class="btn btn-outline" id="loginOpen">เข้าสู่ระบบ</button> <button class="btn"
+                id="registerOpen">สมัครสมาชิก</button></div>
+    </header>
+    <aside id="sideMenu" class="side-menu">
+        <div class="menu-title">เมนูหลัก <button id="menuClose" class="modal-close">×</button></div><button
+            data-page="home">🏠 หน้าหลัก</button><button data-page="clubsPage">🎨 ชมรมทั้งหมด</button><button
+            data-page="eventsPage">🎉 กิจกรรม</button><button data-page="profilePage">👤 โปรไฟล์ของฉัน</button><button
+            data-page="staffPage" id="staffMenuItem" class="hidden">🧩 จัดการชมรม</button><button data-page="adminPage"
+            id="adminMenuItem" class="hidden">🛠 จัดการระบบ</button>
+    </aside>
+    <div id="menuShade" class="menu-shade hidden"></div>
+    <main class="container">
+        <div id="notice" class="notice hidden"></div>
+        <section id="home" class="page">
+            <section class="hero">
+                <div>
+                    <p class="eyebrow">FIND YOUR COMMUNITY</p>
+                    <h1>ค้นหาชมรมที่ใช่<br>เติมสีสันให้ชีวิตมหาวิทยาลัย</h1>
+                    <p>สำรวจชมรม เข้าร่วมกิจกรรม และจัดการสมาชิกได้ในที่เดียว</p>
+                    <div class="hero-actions"><button class="btn" data-page="clubsPage">ค้นหาชมรม ✨</button><button
+                            class="btn btn-pink" data-page="eventsPage">ดูกิจกรรม 🎉</button></div>
+                </div>
+                <div class="hero-icon">🌈</div>
+            </section>
+            <div class="quick-stats">
+                <div class="stat stat-purple"><span>🎨</span>
+                    <div><b id="clubCount">-</b><small>ชมรมทั้งหมด</small></div>
+                </div>
+                <div class="stat stat-orange"><span>🎉</span>
+                    <div><b id="eventCount">-</b><small>กิจกรรมทั้งหมด</small></div>
+                </div>
+                <div class="stat stat-green"><span>🙋</span>
+                    <div><b id="myClubCount">-</b><small>ชมรมของฉัน</small></div>
+                </div>
+            </div>
+            <section class="section">
+                <div class="section-heading">
+                    <div>
+                        <h2>🌟 ชมรมแนะนำ</h2>
+                        <p>ลองดูว่ามีกิจกรรมอะไรที่ตรงกับความสนใจของคุณ</p>
+                    </div><button class="btn btn-outline" data-page="clubsPage">ดูทั้งหมด →</button>
+                </div>
+                <div id="homeClubs" class="cards"></div>
+            </section>
+            <section class="section">
+                <div class="section-heading">
+                    <div>
+                        <h2>🎊 กิจกรรมที่กำลังจะมาถึง</h2>
+                        <p>อย่าพลาดกิจกรรมสนุก ๆ จากชมรมต่าง ๆ</p>
+                    </div><button class="btn btn-outline" data-page="eventsPage">ดูกิจกรรมทั้งหมด →</button>
+                </div>
+                <div id="homeEvents" class="cards event-cards"></div>
+            </section>
+        </section>
+        <section id="clubsPage" class="page hidden">
+            <div class="page-banner banner-purple">
+                <p>DISCOVER</p>
+                <h1>🎨 ชมรมทั้งหมด</h1><span>เลือกชมรมที่สนใจเพื่ออ่านรายละเอียดและเข้าร่วม</span>
+            </div>
+            <section class="section">
+                <div class="section-heading">
+                    <div>
+                        <h2>ค้นหาชมรมที่ชอบ</h2>
+                        <p>มีชมรมหลากหลายความสนใจให้เลือก</p>
+                    </div><input id="clubSearch" class="search" placeholder="🔎 ค้นหาชมรม...">
+                </div>
+                <div id="clubs" class="cards"></div>
+            </section>
+        </section>
+        <section id="eventsPage" class="page hidden">
+            <div class="page-banner banner-orange">
+                <p>WHAT'S ON</p>
+                <h1>🎉 กิจกรรมทั้งหมด</h1><span>ลงทะเบียนเข้าร่วม หรือยกเลิกได้จากหน้านี้</span>
+            </div>
+            <section class="section">
+                <div id="events" class="cards event-cards"></div>
+            </section>
+        </section>
+        <section id="detailPage" class="page hidden"><button class="btn btn-outline" data-page="clubsPage">←
+                กลับไปหน้าชมรม</button>
+            <div id="detailContent" class="detail-panel"></div>
+        </section>
+        <section id="profilePage" class="page hidden">
+            <div class="page-banner banner-pink">
+                <p>MY SPACE</p>
+                <h1>👤 โปรไฟล์ของฉัน</h1><span>ข้อมูลบัญชี ชมรมที่เป็นสมาชิก และกิจกรรมที่ลงทะเบียน</span>
+            </div>
+            <div id="profileContent" class="profile-layout"></div>
+        </section>
+        <section id="staffPage" class="page hidden">
+            <div class="page-banner banner-green">
+                <p>CLUB STAFF</p>
+                <h1>🧩 จัดการชมรม</h1><span>จัดการสมาชิกและกิจกรรมของชมรมที่รับผิดชอบ</span>
+            </div>
+            <section class="section"><label>ชมรมที่ดูแล<select id="staffClubSelect"></select></label>
+                <div class="admin-grid">
+                    <form id="staffEventForm" class="form-card">
+                        <h3>➕ เพิ่มกิจกรรม</h3><label>ชื่อกิจกรรม<input name="title"
+                                required></label><label>วันที่<input name="event_date" type="date"
+                                required></label><label>สถานที่<input name="location"
+                                placeholder="อาคารเรียน"></label><label>รายละเอียด<textarea name="description"
+                                rows="2"></textarea></label><button class="btn btn-orange"
+                            type="submit">เพิ่มกิจกรรม</button>
+                    </form>
+                </div>
+                <section class="section">
+                    <h2>🎉 กิจกรรมของชมรม</h2>
+                    <div id="staffEvents" class="cards event-cards"></div>
+                </section>
+                <section class="section">
+                    <h2>👥 สมาชิกชมรม</h2>
+                    <div id="staffMembers" class="table-wrap"></div>
+                </section>
+            </section>
+        </section>
+        <section id="adminPage" class="page hidden">
+            <div class="page-banner banner-blue">
+                <p>CONTROL CENTER</p>
+                <h1>🛠 จัดการระบบ</h1><span>สำหรับผู้ดูแลระบบเท่านั้น</span>
+            </div>
+            <div class="admin-grid">
+                <form id="clubForm" class="form-card">
+                    <h3>➕ เพิ่มชมรม</h3><label>ชื่อชมรม<input name="name" required
+                            placeholder="เช่น ชมรมคอมพิวเตอร์"></label><label>หมวดหมู่<input name="category"
+                            placeholder="เช่น เทคโนโลยี"></label><label>รายละเอียด<textarea name="description" required
+                            rows="3"></textarea></label><button class="btn" type="submit">เพิ่มชมรม</button>
+                </form>
+                <form id="eventForm" class="form-card">
+                    <h3>🎉 เพิ่มกิจกรรม</h3><label>ชื่อกิจกรรม<input name="title" required></label><label>ชมรม<select
+                            name="club_id" id="eventClub" required></select></label><label>วันที่<input
+                            name="event_date" type="date" required></label><label>สถานที่<input name="location"
+                            placeholder="อาคารเรียน"></label><label>รายละเอียด<textarea name="description"
+                            rows="2"></textarea></label><button class="btn btn-orange"
+                        type="submit">เพิ่มกิจกรรม</button>
+                </form>
+            </div>
+            <section class="section">
+                <h2>👥 บัญชีผู้ใช้</h2>
+                <div id="users" class="table-wrap"></div>
+            </section>
+        </section>
+    </main>
+    <footer>🌈 ClubVerse · ระบบจัดการชมรมด้วย HTML, CSS, JavaScript, Node.js, Express และ MongoDB</footer>
+    <div id="authModal" class="modal hidden">
+        <div class="modal-box"><button class="modal-close" id="modalClose" aria-label="ปิด">×</button>
+            <h2 id="modalTitle">เข้าสู่ระบบ</h2>
+            <form id="authForm">
+                <div id="nameField" class="hidden"><label>ชื่อที่แสดง<input name="name" autocomplete="name"></label>
+                </div>
+                <div id="emailField" class="hidden"><label>อีเมล<input name="email" type="email"
+                            autocomplete="email"></label></div><label>ชื่อผู้ใช้<input name="username" required
+                        autocomplete="username"></label><label>รหัสผ่าน<div class="password-row"><input
+                            id="authPassword" name="password" type="password" required
+                            autocomplete="current-password"><button class="btn btn-outline small-btn password-toggle"
+                            type="button" data-toggle-password="authPassword">แสดง</button></div></label><button
+                    class="btn full" id="authSubmit" type="submit">เข้าสู่ระบบ</button>
+            </form>
+            <p id="authSwitch" class="auth-switch"></p>
+        </div>
+    </div>
+    <script src="/js/app.js"></script>
+</body>
+
+</html>
